@@ -1,15 +1,63 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&display=swap');
 
-@theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+@keyframes slideInFromBottomSlow {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  font-family: "Ancizar Serif", serif;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;
   }
+}
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+
+#main-imgs {
+
+}
+
+.img-slide-1 {
+  animation: slideInFromBottom 1.5s ease-out;
+}
+
+.img-slide-2 {
+  animation: slideInFromBottom 1.5s ease-out 0.3s;
+  animation-fill-mode: backwards;
+}
+
+.img-slide-3 {
+  animation: slideInFromBottom 1.5s ease-out 0.6s;
+  animation-fill-mode: backwards;
+}
+
+.img-slide-4 {
+  animation: slideInFromBottom 1.5s ease-out 0.9s;
+  animation-fill-mode: backwards;
+}
+
+#gallery-btn {
+  animation: slideInFromBottomSlow 1.6s step-end;
 }
