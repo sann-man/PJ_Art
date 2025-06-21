@@ -35,9 +35,7 @@ body::-webkit-scrollbar {
 }
 
 
-#main-imgs {
 
-}
 
 .img-slide-1 {
   animation: slideInFromBottom 1.5s ease-out;

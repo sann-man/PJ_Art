@@ -15,19 +15,17 @@ const mainImages = {
 
 function DispMainContent({ images }) {
   return (
-    <div className="">
-      <div className="p-10 flex md:h-[35em] lg:h-[40em] gap-4">
+    <div className="p-8 flex flex-col items-center gap-4">
+      <div className="flex md:h-[20em] lg:h-[25em] gap-4">
         {Object.entries(images).map(([key, value], index) => (
           <div 
             key={key} 
-            className={`flex h-full overflow-hidden rounded-xl transition-all duration-300 
-                      ease-in-out group-hover:flex-grow hover:flex-[2] flex-[1] img-slide-${index + 1}`}
+            className="rounded-xl transition-all duration-300 ease-in-out group-hover:flex-grow hover:flex-[2] flex-[1]"
           >
             <img 
               src={value} 
               alt={key} 
-              className="cursor-pointer border-2 border-gray-900 rounded-xl h-full object-cover duration-200
-                       hover:ease-in-out hover:w-[1000em]" 
+              className={`border cursor-pointer border-gray-900 rounded-xl object-cover h-full img-slide-${index + 1}`} 
             />
           </div>
         ))}
@@ -36,25 +34,26 @@ function DispMainContent({ images }) {
   );
 }
 
+
+
 export function Welcome() {
   return (
     <main className="">
       <Navbar />
-      <div className="w-full h-full m-0"></div>
-      <div className="-mt-2 text-center absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2
+      <div className="h-3/4 text-center absolute transform -translate-x-1/2 -translate-y-1/2 top-[49%] left-1/2
                     lg:w-3/5 md:w-10/12">
         <h1 className='text-6xl text-white'>PRYCE JONES ART</h1>
-        <div className=""></div>
         <div id='main-imgs'>
           <DispMainContent images={mainImages} />
+          <button 
+            id='gallery-btn' 
+            className="font-mono rounded-xl p-2 text-md w-24 transition-all duration-200 ease-in-out
+                    cursor-pointer bg-transparent border hover:scale-110 text-white hover:shadow-2xl shadow-lg shadow-neutral-700"
+          >
+            <Link to="/gallery">GALLERY</Link>
+          </button>
         </div>
-        <button 
-          id='gallery-btn' 
-          className=" font-mono rounded-xl p-2 text-md w-24 transition-all duration-200 ease-in-out
-                  cursor-pointer bg-transparent border hover:scale-110 text-white hover:shadow-2xl shadow-lg shadow-neutral-700"
-        >
-          <Link to="/gallery">GALLERY</Link>
-        </button>
+       
       </div>
     </main>
   );

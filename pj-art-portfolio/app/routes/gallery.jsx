@@ -43,13 +43,12 @@ function GalleryImages({images}){
 
 export default function Gallery(images) {
 
-  const [isVisible, setIsVisible] = useState(false); 
 
   return (
     <main className=" text-white ">
       <Navbar /> 
       
-      <div className="p-4 w-full absolute transfrom -translate-x-1/2 -translate-y-10/12 top-1/2 left-1/2">
+      <div className="p-4 w-full absolute transfrom -translate-x-1/2 md:-translate-y-5/6 lg:-translate-[60%] top-1/2 left-1/2">
         <div className="text-center mb-10">
           <h1 className="text-6xl font-mono">GALLERY</h1>
         </div>
