@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Ancizar+Serif:ital,wght@0,300..900;1,300..900&display=swap');
 
+body{
+  background-color: black;
+}
+
+
 @keyframes slideInFromBottomSlow {
   0% {
     opacity: 0;
