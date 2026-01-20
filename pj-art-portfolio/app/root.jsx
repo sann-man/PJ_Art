@@ -7,6 +7,8 @@ import {
   ScrollRestoration,
 } from "react-router";
 import "./app.css";
+import { CartProvider } from "./components/cart-context";
+import Cart from "./components/cart";
 
 export function Layout({ children }) {
   return (
@@ -14,6 +16,7 @@ export function Layout({ children }) {
       <head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="Pryce Jones Art Portfolio - Contemporary Art & Visual Expression" />
         <Meta />
         <Links />
       </head>
@@ -27,7 +30,12 @@ export function Layout({ children }) {
 }
 
 export default function App() {
-  return <Outlet />;
+  return (
+    <CartProvider>
+      <Outlet />
+      <Cart />
+    </CartProvider>
+  );
 }
 
 export function ErrorBoundary({ error }) {

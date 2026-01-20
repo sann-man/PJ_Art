@@ -158,6 +158,7 @@ html {
   }
 }
 
+/* Ensure proper spacing for fixed navb.ar */
 .navbar-spacing {
   padding-top: 5rem;
 }

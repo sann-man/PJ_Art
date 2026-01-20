@@ -1,4 +1,31 @@
+# Build artifacts
 .react-router
 build
 node_modules
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Development files
 README.md
+*.md
+
+# Git
+.git
+.gitignore
+
+# IDE
+.vscode
+.idea
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
