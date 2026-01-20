@@ -1,5 +1,5 @@
 import type { Config } from "@react-router/dev/config";
 
 export default {
-  ssr: false, // ensure SPA build
+  ssr: true,
 } satisfies Config;
