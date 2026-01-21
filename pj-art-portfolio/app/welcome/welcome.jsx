@@ -49,14 +49,13 @@ export function Welcome() {
           <div id='main-imgs'>
             <DispMainContent images={mainImages} />
             <div className="mb-8">
-              <Link to="/gallery">
-                <button
-                  id='gallery-btn'
-                  className="modern-button font-mono rounded-xl py-3 px-6 text-sm md:text-base transition-all duration-300 ease-in-out
-                          cursor-pointer text-white mt-4 hover:scale-105"
-                >
-                  EXPLORE GALLERY
-                </button>
+              <Link
+                to="/gallery"
+                id='gallery-btn'
+                className="modern-button font-mono rounded-xl py-3 px-6 text-sm md:text-base transition-all duration-300 ease-in-out
+                          cursor-pointer text-white mt-4 hover:scale-105 inline-block"
+              >
+                EXPLORE GALLERY
               </Link>
             </div>
           </div>
