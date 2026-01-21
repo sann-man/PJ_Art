@@ -40,7 +40,7 @@ export function Welcome() {
       <Navbar />
       <div className="pt-16 md:pt-20 min-h-screen flex flex-col justify-center items-center px-4 pb-12">
         <div className="text-center w-full max-w-5xl">
-          <h1 className='text-3xl md:text-4xl lg:text-5xl text-white font-mono mb-2 mt-8 gradient-text text-shadow-glow float-animation'>
+          <h1 className='text-3xl md:text-4xl lg:text-5xl text-white font-mono mb-3 mt-8 gradient-text text-shadow-glow float-animation'>
             PRYCE JONES
           </h1>
           <p className='text-xl text-gray-300 mb-4 fade-in-scale font-light tracking-wider'>
