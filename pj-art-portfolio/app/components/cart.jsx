@@ -39,12 +39,12 @@ export default function Cart() {
                 <div key={item.id} className="glass-effect p-4 rounded-xl">
                   <div className="flex gap-4">
                     <img
-                      src={item.src}
-                      alt={item.title}
+                      src={item.image_url || item.src}
+                      alt={item.name || item.title}
                       className="w-16 h-16 object-cover rounded-lg"
                     />
                     <div className="flex-1">
-                      <h3 className="text-white font-semibold text-sm">{item.title}</h3>
+                      <h3 className="text-white font-semibold text-sm">{item.name || item.title}</h3>
                       <p className="text-gray-400 text-xs mt-1">{item.description}</p>
                       <p className="text-white font-bold mt-2">${item.price}</p>
                     </div>
