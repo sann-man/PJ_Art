@@ -24,9 +24,13 @@ export default function Navbar() {
           </Link>
         </li>
         <li>
-          <Link 
-            to="/gallery" 
+          <Link
+            to="/gallery"
             className="relative hover:text-gray-300 transition-all duration-300 after:absolute after:bottom-[-4px] after:left-0 after:w-0 after:h-[2px] after:bg-white after:transition-all after:duration-300 hover:after:w-full"
+            onClick={(e) => {
+              console.log('[NAVIGATION DEBUG] Gallery link clicked from navbar');
+              console.log('[NAVIGATION DEBUG] Event:', e);
+            }}
           >
             Gallery
           </Link>
