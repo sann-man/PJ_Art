@@ -54,6 +54,11 @@ export function Welcome() {
                 id='gallery-btn'
                 className="modern-button font-mono rounded-xl py-3 px-6 text-sm md:text-base transition-all duration-300 ease-in-out
                           cursor-pointer text-white mt-4 hover:scale-105 inline-block"
+                onClick={(e) => {
+                  console.log('[NAVIGATION DEBUG] Gallery link clicked from home page');
+                  console.log('[NAVIGATION DEBUG] Event:', e);
+                  console.log('[NAVIGATION DEBUG] Target:', e.target);
+                }}
               >
                 EXPLORE GALLERY
               </Link>

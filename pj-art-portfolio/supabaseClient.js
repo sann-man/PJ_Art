@@ -1,13 +1,18 @@
 import {createClient} from '@supabase/supabase-js'
 
-// Use runtime env vars for SSR, fallback to build-time env vars for client
-const supabaseUrl = typeof process !== 'undefined' && process.env.SUPABASE_URL
-  ? process.env.SUPABASE_URL
-  : import.meta.env.VITE_SUPABASE_URL;
+const supabaseUrl = import.meta.env.VITE_SUPABASE_URL;
+const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
-const supabaseAnonKey = typeof process !== 'undefined' && process.env.SUPABASE_ANON_KEY
-  ? process.env.SUPABASE_ANON_KEY
-  : import.meta.env.VITE_SUPABASE_ANON_KEY;
+console.log('[SUPABASE DEBUG] Initializing Supabase client...');
+console.log('[SUPABASE DEBUG] URL:', supabaseUrl);
+console.log('[SUPABASE DEBUG] Anon Key exists:', !!supabaseAnonKey);
+console.log('[SUPABASE DEBUG] Anon Key length:', supabaseAnonKey?.length);
+
+if (!supabaseUrl || !supabaseAnonKey) {
+  console.error('[SUPABASE DEBUG] ERROR: Missing environment variables!');
+  console.error('[SUPABASE DEBUG] Make sure .env.local has VITE_SUPABASE_URL and VITE_SUPABASE_ANON_KEY');
+  throw new Error('Supabase environment variables are not configured');
+}
 
 export const supabase = createClient(supabaseUrl, supabaseAnonKey); 
 
