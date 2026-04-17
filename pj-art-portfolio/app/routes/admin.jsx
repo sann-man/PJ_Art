@@ -20,9 +20,9 @@ export default function Admin() {
     file: null
   });
 
-  // Test credentials
-  const TEST_EMAIL = "test@mail.com";
-  const TEST_PASSWORD = "test123";
+  // Admin credentials
+  const ADMIN_USERNAME = "pryce510";
+  const ADMIN_PASSWORD = "pryceArt510!";
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -47,14 +47,12 @@ export default function Admin() {
 
   const handleLogin = (e) => {
     e.preventDefault();
-    console.log('Login attempt:', { email, password });
-    console.log('Expected:', { TEST_EMAIL, TEST_PASSWORD });
 
-    if (email.trim() === TEST_EMAIL && password.trim() === TEST_PASSWORD) {
+    if (email.trim() === ADMIN_USERNAME && password.trim() === ADMIN_PASSWORD) {
       setIsAuthenticated(true);
       setError("");
     } else {
-      setError("Invalid credentials. Use test@mail.com / test123");
+      setError("Invalid credentials");
     }
   };
 
@@ -65,31 +63,42 @@ export default function Admin() {
     try {
       // Upload image to storage
       const fileName = `${Date.now()}_${formData.file.name}`;
-      const { error: uploadError } = await supabase.storage
+      const { data: uploadData, error: uploadError } = await supabase.storage
         .from('images')
-        .upload(fileName, formData.file);
+        .upload(fileName, formData.file, {
+          cacheControl: '3600',
+          upsert: false
+        });
 
-      if (uploadError) throw uploadError;
+      if (uploadError) {
+        console.error('Upload error details:', uploadError);
+        throw new Error(`Upload failed: ${uploadError.message}`);
+      }
 
       // Insert into database
-      const { error: dbError } = await supabase
+      const { data: dbData, error: dbError } = await supabase
         .from('images')
         .insert([{
           name: formData.name,
           price: parseFloat(formData.price),
           description: formData.description,
           file_path: fileName
-        }]);
+        }])
+        .select();
 
-      if (dbError) throw dbError;
+      if (dbError) {
+        console.error('Database error details:', dbError);
+        throw new Error(`Database insert failed: ${dbError.message}`);
+      }
 
       // Reset form and reload
       setFormData({ name: "", price: "", description: "", file: null });
       setShowAddModal(false);
+      alert('Image added successfully!');
       await loadImages();
     } catch (error) {
       console.error('Error adding image:', error);
-      alert('Failed to add image');
+      alert(`Failed to add image: ${error.message}`);
     }
     setLoading(false);
   };
@@ -188,11 +197,11 @@ export default function Admin() {
               )}
 
               <div className="group">
-                <label className="block text-white text-sm font-mono mb-2">EMAIL</label>
+                <label className="block text-white text-sm font-mono mb-2">USERNAME</label>
                 <input
                   className="w-full py-3 px-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg text-white placeholder-gray-400
                            focus:outline-none focus:ring-2 focus:ring-white/20 focus:border-transparent transition-all duration-300"
-                  type="email"
+                  type="text"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   required
@@ -329,12 +338,13 @@ export default function Admin() {
                 <label className="block text-white text-sm font-mono mb-2">IMAGE</label>
                 <input
                   className="w-full py-3 px-4 bg-white/5 backdrop-blur-md border border-white/10 rounded-lg text-white
-                           focus:outline-none focus:ring-2 focus:ring-white/20 transition-all"
+                           focus:outline-none focus:ring-2 focus:ring-white/20 transition-all file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-white/10 file:text-white"
                   type="file"
                   accept="image/*"
                   onChange={(e) => setFormData({ ...formData, file: e.target.files[0] })}
                   required
                 />
+                {formData.file && <p className="text-gray-300 text-sm mt-2">Selected: {formData.file.name}</p>}
               </div>
 
               <button

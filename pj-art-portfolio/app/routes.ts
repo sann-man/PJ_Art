@@ -7,4 +7,6 @@ export default [
     route("contact", "routes/contact.jsx"),
     route("login", "routes/login.jsx"),
     route("admin", "routes/admin.jsx"),
+    route("api/create-checkout-session", "routes/api/create-checkout-session.js"),
+    route("success", "routes/success.jsx"),
 ] satisfies RouteConfig; 

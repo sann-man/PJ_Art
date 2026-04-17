@@ -1,8 +1,37 @@
+import { useState } from 'react';
 import { MdClose, MdAdd, MdRemove, MdShoppingCart } from 'react-icons/md';
 import { useCart } from './cart-context';
 
 export default function Cart() {
   const { items, isOpen, toggleCart, updateQuantity, removeItem, getTotalPrice, clearCart } = useCart();
+  const [loading, setLoading] = useState(false);
+
+  const handleCheckout = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch('/api/create-checkout-session', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ items }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create checkout session');
+      }
+
+      const { url } = await response.json();
+
+      // Redirect to Stripe Checkout
+      window.location.href = url;
+    } catch (error) {
+      console.error('Checkout error:', error);
+      alert(`Failed to initiate checkout: ${error.message}`);
+      setLoading(false);
+    }
+  };
 
   if (!isOpen) return null;
 
@@ -86,12 +115,16 @@ export default function Cart() {
               <span>Total:</span>
               <span>${getTotalPrice().toFixed(2)}</span>
             </div>
-            
+
             <div className="space-y-3">
-              <button className="modern-button w-full py-3 px-6 rounded-xl font-mono text-white hover:scale-105 transition-all duration-300">
-                Checkout with Stripe
+              <button
+                onClick={handleCheckout}
+                disabled={loading}
+                className="modern-button w-full py-3 px-6 rounded-xl font-mono text-white hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? 'Processing...' : 'Checkout with Stripe'}
               </button>
-              
+
               <button
                 onClick={clearCart}
                 className="w-full py-2 px-6 rounded-xl border border-gray-600 text-gray-300 hover:bg-gray-600/20 transition-all duration-300 text-sm"
